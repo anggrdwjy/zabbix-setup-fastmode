@@ -29,6 +29,8 @@ case $choice in
    sudo timedatectl set-timezone Asia/Jakarta
    sudo timedatectl set-ntp on
    sudo apt install wget unzip fping apache2 -y
+   mv /var/www/html/index.html /var/www/html/index.html.bak
+   cp support/html-index.html /var/www/html/index.html
    systemctl --now enable apache2
    sudo apt install php php-{snmp,cgi,mbstring,common,net-socket,gd,xml-util,mysql,bcmath,imap} -y
    sudo apt install libapache2-mod-php
