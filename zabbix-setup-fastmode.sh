@@ -38,8 +38,7 @@ case $choice in
    systemctl enable --now mariadb
    wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
    sudo dpkg -i zabbix-release_7.0-2+ubuntu24.04_all.deb
-   sudo apt update
-   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y
    sudo a2enconf php8.3-cgi
    sudo systemctl restart apache2
    mysql -e "CREATE DATABASE zabbix DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"            
