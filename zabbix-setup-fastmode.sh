@@ -39,7 +39,7 @@ case $choice in
    wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-1+ubuntu$(lsb_release -rs)_all.deb
    sudo dpkg -i zabbix-release_7.0-1+ubuntu$(lsb_release -rs)_all.deb
    sudo apt update
-   sudo apt install vim zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
    sudo a2enconf php8.3-cgi
    sudo systemctl restart apache2
    mysql -e "CREATE DATABASE zabbix DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"            
