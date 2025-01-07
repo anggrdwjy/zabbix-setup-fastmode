@@ -1,23 +1,36 @@
 #!/bin/bash
 #===============================================================#
 # Script Name   : zabbix-ubuntu-install                         #
-# Description   : Script Install Zabbix on Ubuntu	              #
+# Description   : Script Install Zabbix on Ubuntu	             #
 # Author        : Anggarda Saputra Wijaya                       #
 # Github        : https://github.com/anggrdwjy.                 #
 #===============================================================#
 again='y'
 while [[ $again == 'Y' ]] || [[ $again == 'y' ]] ; do
 clear   
-echo "   __________________________________________________	";                                                            
-echo "                                                	    ";
+echo "     ____      __   __   _        ____                                ";
+echo "    /_  /___ _/ /  / /  (_)_ __  / __/__ _____  _____ ____            ";
+echo "     / // _ `/ _ \/ _ \/ /\ \ / _\ \/ -_) __/ |/ / -_) __/            ";
+echo "    /___|_,_/_.__/_.__/_//_\_\ /___/\__/_/  |___/\__/_/               ";
+echo "      ____    __              ____        __                __        ";
+echo "     / __/__ / /___ _____    / __/__ ____/ /___ _  ___  ___/ /__      ";
+echo "    _\ \/ -_) __/ // / _ \  / _// _ `(_-< __/  ' \/ _ \/ _  / -_)     ";
+echo "   /___/\__/\__/\_,_/ .__/ /_/  \_,_/___|__/_/_/_/\___/\_,_/\__/      ";
+echo "                   /_/                                                ";
+echo "												                                  ";
+echo "   Version: 1.0.3 - 06/01/2025                            	          ";
+echo "   Developer: https://github.com/anggrdwjy              	             ";
+echo "   Support OS : Ubuntu 24.10                      	                   ";
+echo "   __________________________________________________	  ";                                                            
+echo "                                                	     ";
 echo "   Options List :                                		  ";
-echo "   1) Install Zabbix Server 7.0 Fastmode     		      ";
-echo "   2) Reboot Server	                   		            ";
-echo "   3) Exit         	                   		            ";
-echo "   __________________________________________________ ";
-echo "                                                      ";
+echo "   1) Install Zabbix Server 7.0 Fastmode     		     ";
+echo "   2) Reboot Server	                   		           ";
+echo "   3) Exit         	                   		           ";
+echo "   __________________________________________________   ";
+echo "                                                        ";
 read -p "   Enter a number the options listed: " choice;
-echo "                                                    	";
+echo "                                                    	  ";
 case $choice in              
 
 1) read -p "   Install Zabbix Fastmode ? y/n :" -n 1 -r
@@ -29,6 +42,7 @@ case $choice in
    sudo timedatectl set-timezone Asia/Jakarta
    sudo timedatectl set-ntp on
    sudo apt install wget unzip fping apache2 -y
+   sudo apt install locales -y && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
    mv /var/www/html/index.html /var/www/html/index.html.bak
    cp support/html-index.html /var/www/html/index.html
    systemctl --now enable apache2
@@ -53,7 +67,6 @@ case $choice in
    cp support/zabbix_server.conf /etc/zabbix/zabbix_server.conf
    sudo systemctl enable --now zabbix-server zabbix-agent
    sudo systemctl restart apache2 mariadb zabbix-server zabbix-agent
-   sudo apt-get install -y locales && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen && service apache2 restart
    echo "                                                  ";
    echo "   ======== Zabbix Success Installing Done ======== 	   ";
    echo "                                                  ";
