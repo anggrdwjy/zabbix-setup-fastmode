@@ -53,6 +53,7 @@ case $choice in
    cp support/zabbix_server.conf /etc/zabbix/zabbix_server.conf
    sudo systemctl enable --now zabbix-server zabbix-agent
    sudo systemctl restart apache2 mariadb zabbix-server zabbix-agent
+   sudo apt-get install -y locales && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen && service apache2 restart
    echo "                                                  ";
    echo "   ======== Zabbix Success Installing Done ======== 	   ";
    echo "                                                  ";
