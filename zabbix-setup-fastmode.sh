@@ -38,32 +38,33 @@ case $choice in
    echo "                                                  ";
    if [[ ! $REPLY =~ ^[Nn]$ ]] 
    then
-   sudo apt update
-   sudo timedatectl set-timezone Asia/Jakarta
-   sudo timedatectl set-ntp on
-   sudo apt install wget unzip fping apache2 -y
-   sudo apt install locales -y && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
-   cp support/html-index.html /var/www/html/index.html
-   systemctl --now enable apache2
-   sudo apt install php php-{snmp,cgi,mbstring,common,net-socket,gd,xml-util,mysql,bcmath,imap} -y
-   sudo apt install libapache2-mod-php
-   cp support/apache2-php.ini /etc/php/*/apache2/php.ini
-   sudo apt install mariadb-server mariadb-client-compat -y
-   systemctl enable --now mariadb
+   apt update
+   timedatectl set-timezone Asia/Jakarta
+   timedatectl set-ntp on
+   apt install wget unzip fping apache2 -y
+   apt install locales -y && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
+   apt install php php-{snmp,cgi,mbstring,common,net-socket,gd,xml-util,mysql,bcmath,imap} -y
+   apt install mariadb-server mariadb-client-compat libapache2-mod-php -y
+   apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y
    cp support/zabbix-release_7.0-2+ubuntu24.04_all.deb zabbix-release_7.0-2_all.deb
-   sudo dpkg -i zabbix-release_7.0-2_all.deb
-   sudo apt update
-   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y
-   sudo a2enconf php8.3-cgi
-   sudo systemctl restart apache2
+   dpkg -i zabbix-release_7.0-2_all.deb
+   apt update
+   a2enconf php8.3-cgi
+   systemctl restart apache2
+   systemctl enable --now mariadb
    mysql -e "CREATE DATABASE zabbix DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"            
    mysql -e "GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost' IDENTIFIED BY 'baseball';"
    mysql -e "GRANT SELECT ON mysql.time_zone_name TO zabbix@localhost;"
    mysql -e "FLUSH PRIVILEGES;"
    zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u root zabbix
-   cp support/zabbix_server.conf /etc/zabbix/zabbix_server.conf
-   sudo systemctl enable --now zabbix-server zabbix-agent
-   sudo systemctl restart apache2 mariadb zabbix-server zabbix-agent
+   mv /etc/php/8.3/apache2/php.ini /home/apache2-php.ini
+   mv /etc/php.8.3/cli/php.ini /home/cli-php.ini
+   mv /etc/zabbix/zabbix_server.conf /home/server.conf
+   cp support/apache2-php.ini /etc/php/8.3/apache2/php.ini
+   cp support/cli-php.ini /etc/php/8.3/cli/php.ini
+   cp support/server.conf /etc/zabbix/zabbix_server.conf
+   systemctl enable --now zabbix-server zabbix-agent
+   systemctl restart apache2 mariadb zabbix-server zabbix-agent
    echo "                                                  ";
    echo "   ======== Zabbix Success Installing Done ======== 	   ";
    echo "                                                  ";
