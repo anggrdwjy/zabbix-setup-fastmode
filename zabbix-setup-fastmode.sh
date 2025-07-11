@@ -59,10 +59,7 @@ case $choice in
    mysql -e "FLUSH PRIVILEGES;"
    zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u root zabbix
    mv /etc/php/8.3/apache2/php.ini /home/apache2-php.ini
-   mv /etc/php.8.3/cli/php.ini /home/cli-php.ini
-   mv /etc/zabbix/zabbix_server.conf /home/server.conf
    cp support/apache2-php.ini /etc/php/8.3/apache2/php.ini
-   cp support/cli-php.ini /etc/php/8.3/cli/php.ini
    cp support/server.conf /etc/zabbix/zabbix_server.conf
    systemctl enable --now zabbix-server zabbix-agent
    systemctl restart apache2 mariadb zabbix-server zabbix-agent
