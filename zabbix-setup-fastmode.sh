@@ -42,12 +42,12 @@ case $choice in
    timedatectl set-timezone Asia/Jakarta
    timedatectl set-ntp on
    apt install software-properties-common wget -y
-   wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2%2Bubuntu24.04_all.deb
-   mv zabbix-release_7.0-2+ubuntu24.04_all.deb zabbix-release_7.0-2_all.deb
-   dpkg -i zabbix-release_7.0-2_all.deb
    apt install locales -y && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
    apt install unzip fping apache2 php php-{snmp,cgi,cli,mbstring,common,net-socket,gd,xml-util,mysql,bcmath,imap} -y
    apt install mariadb-server mariadb-client-compat libapache2-mod-php -y
+   wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2%2Bubuntu24.04_all.deb
+   mv zabbix-release_7.0-2+ubuntu24.04_all.deb zabbix-release_7.0-2_all.deb
+   dpkg -i zabbix-release_7.0-2_all.deb
    apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y
    a2enconf php8.3-cgi
    systemctl restart apache2
