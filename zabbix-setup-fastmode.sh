@@ -46,7 +46,8 @@ case $choice in
    apt install php php-{snmp,cgi,mbstring,common,net-socket,gd,xml-util,mysql,bcmath,imap} -y
    apt install mariadb-server mariadb-client-compat libapache2-mod-php -y
    apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y
-   cp support/zabbix-release_7.0-2+ubuntu24.04_all.deb zabbix-release_7.0-2_all.deb
+   wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2%2Bubuntu24.04_all.deb
+   mv zabbix-release_7.0-2+ubuntu24.04_all.deb zabbix-release_7.0-2_all.deb
    dpkg -i zabbix-release_7.0-2_all.deb
    apt update
    a2enconf php8.3-cgi
