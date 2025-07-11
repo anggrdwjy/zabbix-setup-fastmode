@@ -41,6 +41,7 @@ case $choice in
    apt update
    timedatectl set-timezone Asia/Jakarta
    timedatectl set-ntp on
+   apt install software-properties-common -y
    apt install wget unzip fping apache2 -y
    apt install locales -y && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
    apt install php php-{snmp,cgi,mbstring,common,net-socket,gd,xml-util,mysql,bcmath,imap} -y
